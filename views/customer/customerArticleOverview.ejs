@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href='/stylesheets/articleListStyle.css'>
+    <link rel="stylesheet" href='/stylesheets/articleOverviewStyle.css'>
+
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+
+    <title> Pregled artikla </title>
+
+    <style>
+        .articleOverviewImg {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .articleOverviewImg img {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .article-images {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            width: 100%;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        p {
+            line-height: 1.30;
+        }
+        
+        @media (max-width: 1100px) {
+            .article-images {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 14px;
+            }
+        }
+        
+        @media (max-width: 850px) {
+            .home-section {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .article-images {
+                grid-template-columns: repeat(1, 1fr);
+                gap: 14px;
+            }
+        }
+    </style>
+
+    <script>
+        const chatRoute = (customer_id, customer_role_id, seller_id, seller_role_id) => {
+            location.href = "/kupac/chat/" + customer_id + "_" + customer_role_id + "_" + seller_id + "_" + seller_role_id;
+        }
+
+        const productReviews = (article_id) => {
+            location.href = "/kupac/artikal/" + article_id + "/ocjena";
+        }
+        const sellerFeedback = (seller_id) => {
+            location.href = "/kupac/trgovac/" + seller_id + "/ocjena";
+        }
+
+        const sellerProfile = (seller_id) => {
+            location.href = "/kupac/trgovac/profil/" + seller_id;
+        }
+    </script>
+
+</head>
+
+<body>
+    <!-- SIDEBAR -->
+    <%- include('../include/customer__sidebar.ejs'); %>
+
+        <!-- HOME SECTION -->
+        <section class="home-section">
+
+            <div class="article-info">
+                <h2>Informacije o artiklu</h2>
+                <hr>
+                <br>
+
+                <h3>
+                    <%= data.ARTICLE_DATA[0].store_name %>
+
+                        <button onclick="sellerProfile('<%= data.ARTICLE_DATA[0].seller_id%>')" type="button" class="message-btn">Profil trgovca</button>
+                </h3>
+                <br>
+                <p>Artikal:
+                    <%= data.ARTICLE_DATA[0].article_name %>
+                </p>
+                <p>Cijena:
+                    <%= data.ARTICLE_DATA[0].price %>
+                </p>
+                <p>Kolicina:
+                    <%= data.ARTICLE_DATA[0].quantity %>
+                </p>
+                <p>Stanje:
+                    <%= data.ARTICLE_DATA[0].article_condition %>
+                </p>
+                <p>Grad:
+                    <%= data.ARTICLE_DATA[0].city %>
+                </p>
+
+                <br>
+                <hr>
+                <br>
+
+
+                <h4>Kratki opis</h4>
+                <br>
+
+                <p>
+                    <%= data.ARTICLE_DATA[0].s_description %>
+                </p>
+
+                <br>
+                <hr>
+                <br>
+
+                <p>
+                    <%= data.ARTICLE_DATA[0].l_description %>
+                </p>
+
+                <br>
+                <hr>
+                <br>
+
+
+                <button onclick="chatRoute('<%= data.PERSONAL_DATA.t_user_id%>','<%= data.PERSONAL_DATA.t_role_id%>','<%= data.ARTICLE_DATA[0].seller_id%>', '<%= data.ARTICLE_DATA[0].role_id %>')" type="button" class="message-btn">Poruka
+                    trgovcu</button>
+
+                <button onclick="productReviews('<%= data.ARTICLE_DATA[0].article_id %>')" type="button" class="message-btn">Ocjena artikla</button>
+
+                <button onclick="sellerFeedback('<%= data.ARTICLE_DATA[0].seller_id%>')" type="button" class="message-btn">Ocjena trgovca</button>
+
+            </div>
+
+
+            <div class="article-photos">
+                <h2>Fotografije</h2>
+                <hr>
+
+                <div class="article-images">
+                    <% data.IMAGES_DATA.forEach((img)=> {%>
+                        <div class="articleOverviewImg">
+                            <img src="/images/<%= img.image_path %>" alt="image">
+                        </div>
+                        <% })%>
+                </div>
+            </div>
+        </section>
+
+        <script src="/javascripts/articleListScript.js "></script>
+</body>
+
+</html>

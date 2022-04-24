@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href='/stylesheets/articleListStyle.css'>
+    <link rel="stylesheet" href='/stylesheets/articleOverviewStyle.css'>
+
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+
+    <title> Artikal </title>
+
+    <style>
+        .articleOverviewImg {
+            padding: 20px;
+            width: 600px;
+            height: 300px;
+        }
+        
+        .articleOverviewImg img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+
+    <script>
+        const newRoute = (route) => {
+            location.href = route;
+        }
+    </script>
+
+</head>
+
+<body>
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+        <div class="logo-details">
+            <i class='bx bxl-c-plus-plus icon'></i>
+            <div class="logo_name">CodingLab</div>
+            <i class='bx bx-menu' id="btn"></i>
+        </div>
+        <ul class="nav-list">
+            <li>
+                <a href="#">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="links_name">Dashboard</span>
+                </a>
+                <span class="tooltip">Dashboard</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-user'></i>
+                    <span class="links_name">User</span>
+                </a>
+                <span class="tooltip">User</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-chat'></i>
+                    <span class="links_name">Messages</span>
+                </a>
+                <span class="tooltip">Messages</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-pie-chart-alt-2'></i>
+                    <span class="links_name">Analytics</span>
+                </a>
+                <span class="tooltip">Analytics</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-folder'></i>
+                    <span class="links_name">File Manager</span>
+                </a>
+                <span class="tooltip">Files</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-cart-alt'></i>
+                    <span class="links_name">Order</span>
+                </a>
+                <span class="tooltip">Order</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-heart'></i>
+                    <span class="links_name">Saved</span>
+                </a>
+                <span class="tooltip">Saved</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-cog'></i>
+                    <span class="links_name">Setting</span>
+                </a>
+                <span class="tooltip">Setting</span>
+            </li>
+            <li class="profile">
+                <div class="profile-details">
+                    <img src="/images/profile.jpg" alt="profileImg">
+                    <div class="name_job">
+                        <div class="name">Prem Shahi</div>
+                        <div class="job">Web designer</div>
+                    </div>
+                </div>
+                <i class='bx bx-log-out' id="log_out"></i>
+            </li>
+        </ul>
+    </div>
+
+    <!-- HOME SECTION -->
+
+    <section class="home-section">
+
+        <div class="article-info">
+            <h2>Informacije o artiklu</h2>
+            <p>---------------------------------------------------------------</p>
+            <p>Trgovina:
+                <%= data.ARTICLE_DATA[0].store_name %>
+            </p>
+            <p>Naziv artikla:
+                <%= data.ARTICLE_DATA[0].article_name %>
+            </p>
+            <p>Cijena:
+                <%= data.ARTICLE_DATA[0].price %>
+            </p>
+            <p>Kolicina:
+                <%= data.ARTICLE_DATA[0].quantity %>
+            </p>
+            <p>Stanje (Novo, polovno ili oštećeno):
+                <%= data.ARTICLE_DATA[0].article_condition %>
+            </p>
+            <p>Grad:
+                <%= data.ARTICLE_DATA[0].city %>
+            </p>
+            <p>Adresa:
+                <%= data.ARTICLE_DATA[0].address %>
+            </p>
+            <p>--------------------------------</p>
+            <p>Kratki opis:
+                <%= data.ARTICLE_DATA[0].s_description %>
+            </p>
+            <p>Duzi opis:
+                <%= data.ARTICLE_DATA[0].l_description %>
+            </p>
+            <p>--------------------------------</p>
+            <p>Hidden field (article_id):
+                <%= data.ARTICLE_DATA[0].article_id %>
+            </p>
+            <p>--------------------------------</p>
+            <p>Kategorije artikla:</p>
+            <ul>
+                <% data.CATEGORIES_DATA.forEach((category)=> {%>
+                    <li>
+                        <%= category.category_name %>
+                    </li>
+                    <% })%>
+            </ul>
+
+        </div>
+        <div class="article-photos">
+            <h2>Slike artikla</h2>
+            <p>---------------------------------------------------------------</p>
+
+            <ul>
+                <% data.IMAGES_DATA.forEach((img)=> {%>
+                    <li>
+                        <%= img.image_path %>
+                    </li>
+
+                    <div class="articleOverviewImg">
+                        <img src="/images/<%= img.image_path %>" alt="image">
+                    </div>
+
+                    <p>---------------------------------------------------------------</p>
+                    <% })%>
+            </ul>
+
+        </div>
+    </section>
+
+    <script src="/javascripts/articleListScript.js "></script>
+</body>
+
+</html>

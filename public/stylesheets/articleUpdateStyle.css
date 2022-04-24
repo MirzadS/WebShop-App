@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    padding: 10px;
+    background-color: rgb(152, 206, 199);
+}
+
+.form-input-button {
+    display: flex;
+}
+
+.form {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    width: 85%;
+    margin: 0 auto;
+}
+
+
+/* .article-images {
+    position: relative;
+} */
+
+
+/* .img-x {
+    position: absolute;
+    top: 0;
+    right: 0;
+} */
+
+
+/* .hidden {
+    display: none;
+} */

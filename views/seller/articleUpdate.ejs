@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <link rel="stylesheet" href='/stylesheets/newArticleStyle.css'>
+    <!-- <link rel="stylesheet" href='/stylesheets/articleUpdateStyle.css'> -->
+
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+
+    <title> Ažuriranje artikla </title>
+
+</head>
+
+<body>
+
+    <!-- <form class="form" action="/trgovac/azuriranje-artikla/5" method="post" id="form" enctype="multipart/form-data"> -->
+
+    <div class="container">
+
+        <div class="article-info">
+
+            <div class="mb-3">
+                <label for="article_name" class="form-label">Naziv artikla:</label>
+                <div class="form-input-button">
+                    <input type="text" value="<%= data.ARTICLE_DATA[0].article_name %>" class="form-control" id="article_name" name="article_name" placeholder="Unesite naziv artikla" required>
+                    <!-- <button onclick="fieldUpdate(this.parentNode)" type="button" class="btn btn-success hidden">Update</button> -->
+                    <button type="button" class="btn btn-success hidden">Ažuriraj</button>
+                </div>
+            </div>
+
+            <div class="price-quantity">
+
+                <div class="mb-3 price">
+                    <label for="price" class="form-label">Cijena:</label>
+                    <div class="form-input-button">
+                        <input type="number" value="<%= data.ARTICLE_DATA[0].price %>" class="form-control" id="price" name="price" placeholder="Unesite cijenu" required>
+                        <button type="button" class="btn btn-success hidden">Ažuriraj</button>
+                    </div>
+                </div>
+                <div class="mb-3 quantity">
+                    <label for="quantity" class="form-label">Količina:</label>
+                    <div class="form-input-button">
+                        <input type="number" value="<%= data.ARTICLE_DATA[0].quantity %>" class="form-control" id="quantity" name="quantity" placeholder="Unesite količinu" required>
+                        <button type="button" class="btn btn-success hidden">Ažuriraj</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label for="s_description">Kratki opis:</label>
+                <!-- maxlength="50" -->
+                <textarea class="form-control" name="s_description" id="s_description" rows="2"><%=data.ARTICLE_DATA[0].s_description %></textarea>
+                <button type="button" class="btn btn-success hidden">Ažuriraj</button>
+            </div>
+
+
+            <div class="form-group my-3">
+                <label for="l_description">Duži opis:</label>
+                <!-- maxlength="400" -->
+                <textarea class="form-control" name="l_description" id="l_description" rows="5"><%=data.ARTICLE_DATA[0].l_description %></textarea>
+                <button type="button" class="btn btn-success hidden">Ažuriraj</button>
+
+            </div>
+
+
+            <div class="form-group mb-3">
+                <label for="f_category">Izaberi dodatne kategorije:</label>
+
+                <select class="form-control selectpicker" name="f_category" id="f_category" multiple data-live-search="true" required>
+
+                    <% data.CATEGORIES_DATA.forEach((category)=>{%>
+                        <option value="<%- category.category_id%>">
+                            <%= category.category_name %>
+                        </option>
+                        <% }) %>
+
+                </select>
+
+                <button type="button" class="btn btn-success hidden">Ažuriraj</button>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Ključne riječi:</label>
+
+                <% data.KEYWORDS_DATA.forEach((keyword)=> {%>
+
+                    <div class="form-input-button">
+                        <input type="text" value="<%= keyword.keyword %>" class="form-control" id="keyword_<%= keyword.article_keywords_id %>" name="keywords">
+                        <button type="button" class="btn btn-success hidden">Ažuriraj</button>
+                    </div>
+
+                    <% })%>
+                        <!-- <div class="form-input-button">
+                            <input type="text" value="<%#= data.ARTICLE_DATA[0].keywords %>" class="form-control" id="keyword_2" name="keywords" placeholder="Unesite ključne riječi artikla" required>
+                            <button type="button" class="btn btn-success hidden">Update</button>
+                        </div> -->
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="article_condition">Stanje artikla:</label>
+                <div class="form-input-button">
+                    <select class="custom-select form-control" name="article_condition" id="article_condition" required>
+                        <option value="1">novo</option>
+                        <option value="2">polovno</option>
+                        <option value="3">oštećeno</option>
+                    </select>
+                    <button type="button" class="btn btn-success hidden">Ažuriraj</button>
+                </div>
+            </div>
+
+            <!-- ID TRENUTNOG ARTIKLA -->
+            <input type="hidden" name="country_name" id="currArticleID" value="<%= data.ARTICLE_DATA[0].article_id %>">
+
+        </div>
+
+        <div class="article-photos">
+
+            <div class="saved-images mt-3">
+                <% data.IMAGES_DATA.forEach((img)=> {%>
+                    <div class="articleOverviewImg img_<%= img.image_id %>">
+                        <img class="article-img" src="/images/<%= img.image_path %>" id="<%= img.image_id %>" alt="image">
+                        <span onclick="delete_img('<%=img.image_id %>')" class="img-x">X</span>
+                    </div>
+                    <% })%>
+            </div>
+
+            <div class="mt-3 w-100">
+                <form class="form" action="/trgovac/azuriranje-artikla/<%= data.ARTICLE_DATA[0].article_id %>" method="post" id="form" enctype="multipart/form-data">
+
+                    <div class="card shadow-sm w-100">
+                        <div class="card-header d-flex justify-content-between">
+                            <h4>Dodaj nove fotografije artikla</h4>
+                            <!--  <form class="form" action="/upload" method="post" id="form" enctype="multipart/form-data"> -->
+                            <input type="file" name="image" id="image" class="d-none" accept="image/*" multiple onchange="image_select()">
+                            <!-- IZBRISANO IZ KLASE - btn - JER SE POZIVAO addEventListener -->
+                            <button class=" btn-sm btn-primary" type="button" onclick="document.getElementById('image').click()"> Dodaj </button>
+                            <!-- <input type="submit"> -->
+                            <!-- </form> -->
+                        </div>
+                        <div class="card-body d-flex flex-wrap justify-content-start" id="container">
+                            <!-- Image will be show here-->
+                        </div>
+                    </div>
+
+                    <!-- DODAVANJE NOVIH SLIKA -->
+
+                    <!-- <input type="submit" value="Spasi fotografije"> -->
+                    <input class="btn-success" type="submit">
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- <input type="submit" value="Ažuriraj artikal"> -->
+    <!-- </form> -->
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <!--     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>-->
+    <script src="/javascripts/articleUpdateScript.js"></script>
+
+    <!-- Promijeniti naziv tj za spavacanje slike kreirati novi js fajl -->
+    <script src="/javascripts/newArticleScript.js"></script>
+</body>
+
+</html>

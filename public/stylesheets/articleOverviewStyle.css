@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    background-color: rgb(152, 206, 199);
+}
+
+.home-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.article-info {
+    padding: 30px;
+}
+
+.article-photos {
+    padding: 30px;
+}
+
+.message-btn {
+    padding: 7px;
+    margin: 10px;
+    font-size: 17px;
+    background-color: rgb(6, 95, 88);
+    color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+
+.message-btn:hover {
+    background-color: rgb(11, 116, 107);
+}

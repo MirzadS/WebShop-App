@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/sellerProfileStyle.css">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+
+</head>
+<!-- <img src="<%#= data.profile_picture = null ?? '/images/profile.jpg' %>" alt=""> -->
+
+<body>
+    <div class="main-container">
+        <div class="profile-box-1">
+            <form action="/trgovac/profil/slika" method="post" enctype="multipart/form-data">
+                <div class="wrapper">
+                    <input type="file" name="image" id="image" class="my_file" accept="image/*" onchange="document.querySelector('.saveImg').click()">
+                    <i class='bx bxs-camera'></i>
+                    <img src="<% if (!data.profile_picture) {%>
+                        <%= '/images/profile.jpg' %>     
+                    <%}else{%>
+                        /images/<%=  data.profile_picture %>  
+                    <% }%>" alt="">
+                </div>
+                <input type="submit" class="saveImg hidden">
+            </form>
+
+            <div class="seller-data mt-4">
+                <span class="seller-name">
+                    <%= data.first_name %>
+                        <%= data.last_name %>
+                </span>
+                <span class="seller-store-name">
+                    <%= data.store_name %>
+                </span>
+            </div>
+        </div>
+        <div class="form-box-2">
+
+            <h3 class="mb-5">Profil trgovca</h3>
+            <div></div>
+            <div class="mb-3">
+                <label for="first_name" class="form-label">Ime</label>
+                <div class="form-input-button">
+                    <input type="text" value="<%= data.first_name %>" class="form-control" id="first_name" name="first_name" placeholder="Unesite ime">
+                    <button type="button" class="btn btn-success hidden">Update</button>
+                    <!-- <button type="button" class="btn btn-success btn-1 hidden">Update</button> -->
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="last_name" class="form-label">Prezime</label>
+                <div class="form-input-button">
+                    <input type="text" value="<%= data.last_name %>" class="form-control" id="last_name" name="last_name" placeholder="Unesite prezime">
+                    <button type="button" class="btn btn-success hidden">Update</button>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="store_name" class="form-label">Naziv trgovine</label>
+                <div class="form-input-button">
+                    <input type="text" value="<%= data.store_name %>" class="form-control" id="store_name" name="store_name" placeholder="Unesite naziv trgovine">
+                    <button type="button" class="btn btn-success hidden">Update</button>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <div class="form-input-button">
+                    <input type="email" value="<%= data.email %>" class="form-control" id="email" name="email" placeholder="Unesite email">
+                    <button type="button" class="btn btn-success hidden">Update</button>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="phone_number" class="form-label">Broj telefona</label>
+                <div class="form-input-button">
+                    <input type="number" value="<%= data.phone_number %>" class="form-control" id="phone_number" name="phone_number" placeholder="Unesite broj telefona">
+                    <button type="button" class="btn btn-success hidden">Update</button>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Nova lozinka</label>
+                <div class="form-input-button">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Unesite lozinku">
+                    <button type="button" class="btn btn-success hidden">Update</button>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="city" class="form-label">Grad</label>
+                <div class="form-input-button">
+                    <input type="text" value="<%= data.city %>" class="form-control" id="city" name="city" placeholder="Unesite ime grada">
+                    <button type="button" class="btn btn-success hidden">Update</button>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="address" class="form-label">Adresa</label>
+                <div class="form-input-button">
+                    <input type="text" value="<%= data.address %>" class="form-control" id="address" name="address" placeholder="Unesite tačnu adresu">
+                    <button type="button" class="btn btn-success hidden">Update</button>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="zip_code" class="form-label">Poštanski broj</label>
+                <div class="form-input-button">
+                    <input type="number" value="<%= data.zip_code %>" class="form-control" id="zip_code" name="zip_code" placeholder="Unesite poštanski broj">
+                    <button type="button" class="btn btn-success hidden">Update</button>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="region_canton" class="form-label">Regija/kanton </label>
+                <div class="form-input-button">
+                    <input type="text" value="<%= data.region_canton %>" class="form-control" id="region_canton" name="region_canton" placeholder="Unesite regiju/kanton">
+                    <button type="button" class="btn btn-success hidden">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="/javascripts/sellerProfileScript.js"></script>
+</body>
+
+</html>

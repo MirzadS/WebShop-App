@@ -1,0 +1,124 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    padding: 10px;
+    background-color: rgb(152, 206, 199);
+}
+
+.form {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    width: 85%;
+    margin: 0 auto;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.article-info {
+    padding: 30px;
+}
+
+.article-photos {
+    padding: 30px;
+}
+
+.price-quantity {
+    display: flex;
+    justify-content: space-between;
+}
+
+.price {
+    flex: 0.45;
+}
+
+.quantity {
+    flex: 0.45;
+}
+
+#s_description {
+    resize: none;
+}
+
+#l_description {
+    resize: none;
+}
+
+.upload-photo {
+    width: 100%;
+}
+
+.image_container {
+    height: 120px;
+    width: 200px;
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 10px;
+}
+
+.image_container img {
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+}
+
+.image_container span {
+    top: -6px;
+    right: 8px;
+    color: red;
+    font-size: 28px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.saved-images {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    gap: 12px;
+}
+
+
+/* PROMIJENIT NAZIVE */
+
+
+/* DODANO */
+
+.articleOverviewImg {
+    /* DODANO */
+    position: relative;
+}
+
+.articleOverviewImg img {
+    width: 100%;
+    height: 100%;
+}
+
+.form-input-button {
+    display: flex;
+}
+
+.hidden {
+    display: none;
+}
+
+
+/* OVO TREBA ICI U DRUGI css folder - articleUpdateStyle.css */
+
+.img-x {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: white;
+    padding: 0px 4px;
+    cursor: pointer;
+}
